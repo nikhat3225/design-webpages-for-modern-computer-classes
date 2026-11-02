@@ -1,72 +1,983 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enroll for Paid Course</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Enroll | Modern Computer Classes</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+
+    background:
+    linear-gradient(135deg,#06172f,#083b63,#087d9e,#0bb9df);
+
+    color:#102c4d;
+}
+
+
+/* ================= HEADER ================= */
+
+header{
+    padding:18px 7%;
+
+    background:rgba(3,18,40,.88);
+    backdrop-filter:blur(12px);
+
+    border-bottom:1px solid rgba(85,221,255,.3);
+
+    box-shadow:0 5px 25px rgba(0,0,0,.25);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.brand img{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    object-fit:cover;
+
+    border:2px solid #55ddff;
+}
+
+.brand h2{
+    color:white;
+    font-size:20px;
+}
+
+.brand span{
+    display:block;
+    color:#55ddff;
+    font-size:11px;
+    letter-spacing:2px;
+}
+
+nav{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#55ddff;
+}
+
+
+/* ================= HERO ================= */
+
+.hero{
+    text-align:center;
+    color:white;
+    padding:45px 20px 25px;
+}
+
+.hero h1{
+    font-size:38px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.hero p{
+    font-size:14px;
+    opacity:.9;
+}
+
+
+/* ================= ENROLL BOX ================= */
+
+.enroll-container{
+    width:92%;
+    max-width:650px;
+
+    margin:15px auto 60px;
+
+    background:rgba(255,255,255,.97);
+
+    border-radius:25px;
+
+    padding:35px;
+
+    box-shadow:0 18px 45px rgba(0,0,0,.25);
+
+    animation:slideUp .8s ease;
+}
+
+@keyframes slideUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+
+/* ICON */
+
+.enroll-icon{
+    width:75px;
+    height:75px;
+
+    margin:0 auto 15px;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:34px;
+
+    color:white;
+
+    background:linear-gradient(135deg,#087da0,#0bc3e8);
+
+    box-shadow:0 8px 22px rgba(11,195,232,.35);
+}
+
+
+/* HEADING */
+
+.enroll-container h2{
+    text-align:center;
+    color:#102c4d;
+    font-size:27px;
+    margin-bottom:7px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#68798a;
+    font-size:13px;
+    margin-bottom:28px;
+}
+
+
+/* ================= FORM ================= */
+
+form{
+    display:flex;
+    flex-direction:column;
+    gap:17px;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:7px;
+    color:#102c4d;
+}
+
+input,
+select{
+    width:100%;
+
+    padding:13px 15px;
+
+    border:1px solid #d7e1e8;
+    border-radius:10px;
+
+    background:#f8fbfd;
+
+    font-family:Poppins;
+    font-size:13px;
+
+    outline:none;
+
+    transition:.3s;
+}
+
+input:focus,
+select:focus{
+    border-color:#0bb8df;
+
+    box-shadow:
+    0 0 0 3px rgba(11,184,223,.12);
+
+    background:white;
+}
+
+
+/* ================= COURSE SUMMARY ================= */
+
+.course-summary{
+    display:none;
+
+    background:linear-gradient(
+        135deg,
+        #e8f9fd,
+        #f5fcff
+    );
+
+    border:1px solid #bcecf6;
+
+    border-radius:15px;
+
+    padding:18px;
+
+    animation:fade .4s ease;
+}
+
+.course-summary h3{
+    color:#087da0;
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+
+    font-size:13px;
+
+    padding:5px 0;
+
+    color:#536879;
+}
+
+.total{
+    border-top:1px solid #cce8ee;
+
+    margin-top:8px;
+    padding-top:10px;
+
+    font-size:17px;
+    font-weight:800;
+
+    color:#087da0;
+}
+
+@keyframes fade{
+
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+
+}
+
+
+/* ================= PAYMENT ================= */
+
+.payment-title{
+    margin-top:5px;
+    margin-bottom:2px;
+}
+
+
+/* PAYMENT OPTIONS */
+
+.payment-options{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
+
+.payment-option{
+    cursor:pointer;
+}
+
+.payment-option input{
+    display:none;
+}
+
+.payment-box{
+
+    padding:13px 7px;
+
+    border:2px solid #e0e7eb;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    background:#f8fbfd;
+
+    font-size:12px;
+
+    transition:.3s;
+}
+
+.payment-box:hover{
+    border-color:#0bb9df;
+    transform:translateY(-2px);
+}
+
+.payment-option input:checked + .payment-box{
+
+    border-color:#087da0;
+
+    background:#e8f9fd;
+
+    color:#087da0;
+
+    box-shadow:
+    0 5px 15px rgba(8,125,160,.15);
+}
+
+
+/* ================= BUTTON ================= */
+
+.pay-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:11px;
+
+    background:
+    linear-gradient(90deg,#087da0,#0bc3e8);
+
+    color:white;
+
+    font-family:Poppins;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:
+    0 7px 20px rgba(8,125,160,.25);
+}
+
+.pay-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 11px 25px rgba(8,125,160,.35);
+}
+
+
+/* ================= NOTE ================= */
+
+.secure-note{
+    text-align:center;
+    margin-top:14px;
+
+    color:#718392;
+    font-size:11px;
+}
+
+
+/* ================= SUCCESS ================= */
+
+.success-box{
+    display:none;
+
+    text-align:center;
+
+    padding:25px;
+}
+
+.success-icon{
+    font-size:65px;
+    margin-bottom:10px;
+}
+
+.success-box h2{
+    color:#087d59;
+    margin-bottom:8px;
+}
+
+.success-box p{
+    color:#68798a;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.back-btn{
+    display:inline-block;
+
+    margin-top:18px;
+
+    padding:11px 20px;
+
+    background:#087da0;
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:9px;
+
+    font-size:13px;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer{
+
+    background:
+    linear-gradient(
+        135deg,
+        #04152d,
+        #062d4d,
+        #064d66
+    );
+
+    color:white;
+
+    text-align:center;
+
+    padding:25px;
+
+    font-size:13px;
+}
+
+footer span{
+    color:#55ddff;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:700px){
+
+    header{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav{
+        gap:12px;
+    }
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    .enroll-container{
+        padding:25px 20px;
+    }
+
+    .payment-options{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+</style>
+
 </head>
-<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(to right, #e0f7fa, #f1f8e9); margin:0; padding:0;">
 
-    <div style="max-width: 550px; margin:50px auto; background-color:#fff; border-radius:25px; box-shadow:0 15px 30px rgba(0,0,0,0.2); padding:40px;">
-        
-        <!-- Header -->
-        <h2 style="text-align:center; background: linear-gradient(to right, #6a11cb, #2575fc); -webkit-background-clip: text; color: transparent; font-size:28px; margin-bottom:30px;">
-            Enroll for Paid Course
-        </h2>
 
-        <form action="payment-success.html" method="post" style="text-align:left;">
+<body>
 
-            <!-- Full Name -->
-            <label style="font-weight:bold; color:#34495e;">Full Name</label><br>
-            <input type="text" name="name" placeholder="Enter your full name" required
-                   style="width:100%; padding:14px; margin-bottom:20px; border-radius:12px; border:1px solid #ccc; transition: border 0.3s;"
-                   onfocus="this.style.borderColor='#6a11cb';" onblur="this.style.borderColor='#ccc';"><br>
 
-            <!-- Email -->
-            <label style="font-weight:bold; color:#34495e;">Email</label><br>
-            <input type="email" name="email" placeholder="Enter your email" required
-                   style="width:100%; padding:14px; margin-bottom:20px; border-radius:12px; border:1px solid #ccc; transition: border 0.3s;"
-                   onfocus="this.style.borderColor='#6a11cb';" onblur="this.style.borderColor='#ccc';"><br>
+<!-- ================= HEADER ================= -->
 
-            <!-- Course & Amount Selection -->
-            <label style="font-weight:bold; color:#34495e;">Select Course & Amount</label><br>
-            <select name="course_amount" required
-                    style="width:100%; padding:14px; margin-bottom:20px; border-radius:12px; border:1px solid #ccc; background-color:#f9f9f9;">
-                <option value="">--Choose a course--</option>
-                <option value="ms-office_3000">MS Office - ₹3000</option>
-                <option value="programming_6000">Programming - ₹6000</option>
-                <option value="web-designing_7000">Web Designing - ₹7000</option>
-                <option value="graphics_5000">Graphics Design - ₹5000</option>
-            </select><br>
+<header>
 
-            <!-- Payment Method -->
-            <label style="font-weight:bold; color:#34495e;">Payment Method</label><br>
-            <div style="margin-bottom:30px; display:flex; gap:10px; flex-wrap:wrap;">
-                <label style="flex:1; text-align:center; cursor:pointer;">
-                    <input type="radio" name="payment_method" value="cash" required style="margin-bottom:5px;">
-                    <div style="padding:10px; border-radius:10px; background-color:#ffb74d; color:#fff;">Cash</div>
+    <div class="brand">
+
+        <img
+            src="images/logo.jpg"
+            alt="Modern Computer Classes Logo"
+        >
+
+        <div>
+
+            <h2>Modern Computer Classes</h2>
+
+            <span>LEARN • GROW • INNOVATE</span>
+
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="about.html">About Us</a>
+
+        <a href="course.html">Courses</a>
+
+        <a href="contact.html">Contact Us</a>
+
+        <a href="login.html">Login</a>
+
+        <a href="registrationform.html">Register</a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <h1>🎓 Enroll Now</h1>
+
+    <p>
+        Start learning today and build your digital skills.
+    </p>
+
+</section>
+
+
+
+<!-- ================= ENROLL ================= -->
+
+<div class="enroll-container">
+
+
+    <!-- FORM SECTION -->
+
+    <div id="formSection">
+
+        <div class="enroll-icon">
+            🎓
+        </div>
+
+        <h2>Course Enrollment</h2>
+
+        <p class="subtitle">
+            Complete the form below to enroll in your selected course.
+        </p>
+
+
+        <form id="enrollForm">
+
+
+            <!-- NAME -->
+
+            <div>
+
+                <label>
+                    Full Name
                 </label>
-                <label style="flex:1; text-align:center; cursor:pointer;">
-                    <input type="radio" name="payment_method" value="gpay" style="margin-bottom:5px;">
-                    <div style="padding:10px; border-radius:10px; background-color:#43a047; color:#fff;">GPay</div>
-                </label>
-                <label style="flex:1; text-align:center; cursor:pointer;">
-                    <input type="radio" name="payment_method" value="cardpay" style="margin-bottom:5px;">
-                    <div style="padding:10px; border-radius:10px; background-color:#1e88e5; color:#fff;">CardPay</div>
-                </label>
-                <label style="flex:1; text-align:center; cursor:pointer;">
-                    <input type="radio" name="payment_method" value="upi" style="margin-bottom:5px;">
-                    <div style="padding:10px; border-radius:10px; background-color:#8e24aa; color:#fff;">UPI</div>
-                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your full name"
+                    required
+                >
+
             </div>
 
-            <!-- Submit Button -->
-            <button type="submit" 
-                    style="width:100%; padding:16px; background: linear-gradient(to right, #6a11cb, #2575fc); color:white; border:none; border-radius:12px; font-size:18px; cursor:pointer; transition: transform 0.3s;">
-                Pay & Enroll
+
+            <!-- EMAIL -->
+
+            <div>
+
+                <label>
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <!-- COURSE -->
+
+            <div>
+
+                <label>
+                    Select Course
+                </label>
+
+                <select id="course" required>
+
+                    <option value="">
+                        -- Choose a course --
+                    </option>
+
+                    <option
+                        value="MS Office"
+                        data-price="3000"
+                        data-duration="2 Months"
+                    >
+                        MS Office - ₹3000
+                    </option>
+
+                    <option
+                        value="Programming"
+                        data-price="6000"
+                        data-duration="3 Months"
+                    >
+                        Programming - ₹6000
+                    </option>
+
+                    <option
+                        value="Web Designing"
+                        data-price="7000"
+                        data-duration="3 Months"
+                    >
+                        Web Designing - ₹7000
+                    </option>
+
+                    <option
+                        value="Graphic Design"
+                        data-price="5000"
+                        data-duration="2.5 Months"
+                    >
+                        Graphic Design - ₹5000
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- COURSE SUMMARY -->
+
+            <div
+                class="course-summary"
+                id="courseSummary"
+            >
+
+                <h3>
+                    📚 Selected Course
+                </h3>
+
+                <div class="summary-row">
+
+                    <span>Course</span>
+
+                    <strong id="summaryCourse">
+                        -
+                    </strong>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <span>Duration</span>
+
+                    <strong id="summaryDuration">
+                        -
+                    </strong>
+
+                </div>
+
+                <div class="summary-row total">
+
+                    <span>Total Amount</span>
+
+                    <strong id="summaryPrice">
+                        ₹0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- PAYMENT -->
+
+            <div>
+
+                <label class="payment-title">
+                    Select Payment Method
+                </label>
+
+
+                <div class="payment-options">
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="Cash"
+                            required
+                        >
+
+                        <div class="payment-box">
+                            💵 Cash
+                        </div>
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="GPay"
+                        >
+
+                        <div class="payment-box">
+                            📱 GPay
+                        </div>
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="Card"
+                        >
+
+                        <div class="payment-box">
+                            💳 Card
+                        </div>
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="UPI"
+                        >
+
+                        <div class="payment-box">
+                            🔗 UPI
+                        </div>
+
+                    </label>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <button
+                type="submit"
+                class="pay-btn"
+            >
+                Pay & Enroll 🚀
             </button>
+
+
+            <p class="secure-note">
+                🔒 Your enrollment information is kept secure.
+            </p>
+
+
         </form>
+
     </div>
+
+
+
+    <!-- SUCCESS SECTION -->
+
+    <div
+        class="success-box"
+        id="successBox"
+    >
+
+        <div class="success-icon">
+            🎉
+        </div>
+
+        <h2>
+            Enrollment Successful!
+        </h2>
+
+        <p id="successMessage">
+            Your course enrollment has been received.
+        </p>
+
+        <a
+            href="index.html"
+            class="back-btn"
+        >
+            ← Back to Home
+        </a>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    © 2026
+    <span>Modern Computer Classes</span>
+    |
+    Learn • Grow • Innovate
+
+</footer>
+
+
+
+<script>
+
+/* ================= COURSE SELECTION ================= */
+
+const courseSelect =
+    document.getElementById("course");
+
+const courseSummary =
+    document.getElementById("courseSummary");
+
+const summaryCourse =
+    document.getElementById("summaryCourse");
+
+const summaryPrice =
+    document.getElementById("summaryPrice");
+
+const summaryDuration =
+    document.getElementById("summaryDuration");
+
+
+courseSelect.addEventListener("change", function(){
+
+    const selected =
+        courseSelect.options[
+            courseSelect.selectedIndex
+        ];
+
+
+    if(!selected.value){
+
+        courseSummary.style.display = "none";
+
+        return;
+
+    }
+
+
+    const course =
+        selected.value;
+
+    const price =
+        selected.dataset.price;
+
+    const duration =
+        selected.dataset.duration;
+
+
+    summaryCourse.textContent =
+        course;
+
+    summaryPrice.textContent =
+        "₹" + price;
+
+    summaryDuration.textContent =
+        duration;
+
+
+    courseSummary.style.display =
+        "block";
+
+});
+
+
+
+/* ================= FORM SUBMIT ================= */
+
+const form =
+    document.getElementById("enrollForm");
+
+form.addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+
+    const name =
+        document.getElementById("name").value;
+
+    const course =
+        courseSelect.value;
+
+    const payment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        ).value;
+
+
+    document.getElementById("formSection")
+        .style.display = "none";
+
+
+    document.getElementById("successBox")
+        .style.display = "block";
+
+
+    document.getElementById("successMessage")
+        .textContent =
+        "Thank you " +
+        name +
+        "! Your enrollment for " +
+        course +
+        " has been received through " +
+        payment +
+        ". We will contact you with the next steps.";
+
+});
+
+</script>
+
 
 </body>
 </html>

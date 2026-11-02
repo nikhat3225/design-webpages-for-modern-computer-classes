@@ -1,0 +1,909 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard | Modern Computer Classes</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f3f7fc;
+    color: #183452;
+}
+
+/* Header */
+.header {
+    background: #102b50;
+    color: white;
+    padding: 18px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h2 {
+    font-size: 21px;
+}
+
+.logo p {
+    color: #16b8d4;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #e8f4ff;
+    color: #0879d9;
+    display: grid;
+    place-items: center;
+    font-size: 20px;
+}
+
+/* Main layout */
+.layout {
+    display: flex;
+    min-height: calc(100vh - 70px);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 225px;
+    background: #102b50;
+    padding: 20px 12px;
+    flex-shrink: 0;
+}
+
+.sidebar button {
+    width: 100%;
+    display: block;
+    padding: 14px;
+    margin-bottom: 8px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: white;
+    text-align: left;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.sidebar button:hover,
+.sidebar button.active {
+    background: #0879d9;
+}
+
+/* Main content */
+main {
+    flex: 1;
+    min-width: 0;
+    padding: 25px;
+}
+
+.welcome {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px #00000008;
+}
+
+.welcome h1 {
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+.welcome p {
+    color: #6d8097;
+    font-size: 14px;
+}
+
+/* Cards */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border: 1px solid #e3ebf5;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px #00000008;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #e8f4ff;
+    color: #0879d9;
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+}
+
+.stat p {
+    color: #6d8097;
+    font-size: 13px;
+}
+
+.stat h2 {
+    font-size: 24px;
+    margin-top: 8px;
+}
+
+/* Content grid */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.card h2 {
+    font-size: 19px;
+    margin-bottom: 16px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-heading h2 {
+    margin: 0;
+}
+
+.view-btn {
+    background: none;
+    border: none;
+    color: #0879d9;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+/* Dynamic course list */
+.course {
+    padding: 14px 0;
+    border-bottom: 1px solid #e3ebf5;
+}
+
+.course:last-child {
+    border-bottom: none;
+}
+
+.course-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+}
+
+.course h3 {
+    font-size: 14px;
+}
+
+.course p {
+    color: #6d8097;
+    font-size: 12px;
+    margin: 7px 0;
+}
+
+.tag {
+    padding: 5px 9px;
+    border-radius: 20px;
+    background: #eaf5ff;
+    color: #0879d9;
+    font-size: 11px;
+}
+
+.progress-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress {
+    height: 9px;
+    flex: 1;
+    background: #e9eff6;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, #0879d9, #16b8d4);
+    border-radius: 10px;
+}
+
+.progress-row small {
+    font-size: 12px;
+    min-width: 35px;
+}
+
+/* Classes */
+.class-item {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 13px 0;
+    border-bottom: 1px solid #e3ebf5;
+}
+
+.class-item:last-child {
+    border-bottom: none;
+}
+
+.class-date {
+    min-width: 48px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    background: #edf6ff;
+    color: #0879d9;
+}
+
+.class-item h3 {
+    font-size: 13px;
+}
+
+.class-item p {
+    color: #6d8097;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Lower sections */
+.lower-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid #e3ebf5;
+    font-size: 13px;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.muted {
+    color: #6d8097;
+}
+
+.notice {
+    padding: 12px 0;
+    border-bottom: 1px solid #e3ebf5;
+    font-size: 13px;
+}
+
+.notice:last-child {
+    border: none;
+}
+
+.notice small {
+    display: block;
+    color: #6d8097;
+    margin-top: 5px;
+}
+
+.empty {
+    padding: 22px 10px;
+    text-align: center;
+    color: #8a9bb0;
+    font-size: 13px;
+}
+
+.action {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 7px;
+    background: #0879d9;
+    color: white;
+    cursor: pointer;
+}
+
+/* Pages */
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+@media(max-width:1000px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .lower-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width:700px) {
+    .layout {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+        padding: 8px;
+    }
+    .sidebar button {
+        min-width: 115px;
+        text-align: center;
+        font-size: 12px;
+    }
+    main {
+        padding: 14px;
+    }
+    .content-grid,
+    .lower-grid {
+        grid-template-columns: 1fr;
+    }
+    .welcome {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
+
+@media(max-width:420px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+    .header {
+        padding: 14px;
+    }
+    .logo h2 {
+        font-size: 16px;
+    }
+    .profile span {
+        display: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="logo">
+        <h2>💻 Modern Computer Classes</h2>
+        <p>Learn • Grow • Innovate</p>
+    </div>
+    <div class="profile">
+        <div class="avatar">👤</div>
+        <span id="headerName">Student</span>
+    </div>
+</header>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <button class="active"
+        onclick="showPage('Dashboard',this)">
+        🏠 Dashboard
+    </button>
+
+    <button onclick="showPage('Courses',this)">
+        📚 My Courses
+    </button>
+
+    <button onclick="showPage('Attendance',this)">
+        📅 Attendance
+    </button>
+
+    <button onclick="showPage('Assignments',this)">
+        📝 Assignments
+    </button>
+
+    <button onclick="showPage('Quizzes',this)">
+        📋 Quizzes
+    </button>
+
+    <button onclick="showPage('Certificates',this)">
+        🏆 Certificates
+    </button>
+
+    <button onclick="showPage('Profile',this)">
+        👤 Profile
+    </button>
+
+    <button onclick="showPage('Fees',this)">
+        💳 Fees
+    </button>
+
+    <button onclick="logout()">
+        🚪 Logout
+    </button>
+</aside>
+
+<!-- MAIN -->
+<main>
+
+<!-- DASHBOARD -->
+<section id="Dashboard" class="page active">
+
+    <div class="welcome">
+        <div>
+            <h1>Welcome, <span id="studentName">Student</span>! 👋</h1>
+            <p>Welcome to your student dashboard.</p>
+        </div>
+    </div>
+
+    <!-- STATISTICS -->
+    <div class="stats">
+
+        <div class="card stat">
+            <div class="icon">📚</div>
+            <div>
+                <p>Enrolled Courses</p>
+                <h2 id="courseCount">—</h2>
+            </div>
+        </div>
+
+        <div class="card stat">
+            <div class="icon">✓</div>
+            <div>
+                <p>Completed Lessons</p>
+                <h2 id="lessonCount">—</h2>
+            </div>
+        </div>
+
+        <div class="card stat">
+            <div class="icon">📝</div>
+            <div>
+                <p>Quiz Average</p>
+                <h2 id="quizAverage">—</h2>
+            </div>
+        </div>
+
+        <div class="card stat">
+            <div class="icon">🏆</div>
+            <div>
+                <p>Certificates</p>
+                <h2 id="certificateCount">—</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- COURSES AND CLASSES -->
+    <div class="content-grid">
+
+        <div class="card">
+            <div class="section-heading">
+                <h2>My Courses</h2>
+                <button class="view-btn"
+                    onclick="showPage('Courses')">
+                    View All →
+                </button>
+            </div>
+            <div id="dashboardCourses" class="empty">
+                No courses available.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-heading">
+                <h2>Upcoming Classes</h2>
+            </div>
+            <div id="upcomingClasses" class="empty">
+                No upcoming classes.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ATTENDANCE, QUIZZES, ANNOUNCEMENTS -->
+    <div class="lower-grid">
+
+        <div class="card">
+            <h2>Attendance</h2>
+            <div class="info-row">
+                <span>Overall Attendance</span>
+                <strong id="attendance">—</strong>
+            </div>
+            <div class="info-row">
+                <span>Present Classes</span>
+                <strong id="presentClasses">—</strong>
+            </div>
+            <div class="info-row">
+                <span>Total Classes</span>
+                <strong id="totalClasses">—</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Recent Quizzes</h2>
+            <div id="recentQuizzes" class="empty">
+                No quiz results available.
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Announcements</h2>
+            <div id="announcements" class="empty">
+                No announcements available.
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- COURSES PAGE -->
+<section id="Courses" class="page">
+    <div class="card">
+        <h2>My Courses</h2>
+        <div id="allCourses" class="empty">
+            No courses available.
+        </div>
+    </div>
+</section>
+
+<!-- ATTENDANCE PAGE -->
+<section id="Attendance" class="page">
+    <div class="card">
+        <h2>Attendance Details</h2>
+        <div id="attendanceDetails" class="empty">
+            Attendance information is not available.
+        </div>
+    </div>
+</section>
+
+<!-- ASSIGNMENTS PAGE -->
+<section id="Assignments" class="page">
+    <div class="card">
+        <h2>My Assignments</h2>
+        <div id="assignmentList" class="empty">
+            No assignments available.
+        </div>
+    </div>
+</section>
+
+<!-- QUIZZES PAGE -->
+<section id="Quizzes" class="page">
+    <div class="card">
+        <h2>My Quizzes</h2>
+        <div id="quizList" class="empty">
+            No quizzes available.
+        </div>
+    </div>
+</section>
+
+<!-- CERTIFICATES PAGE -->
+<section id="Certificates" class="page">
+    <div class="card">
+        <h2>My Certificates</h2>
+        <div id="certificateList" class="empty">
+            No certificates available.
+        </div>
+    </div>
+</section>
+
+<!-- PROFILE PAGE -->
+<section id="Profile" class="page">
+    <div class="card">
+        <h2>Student Profile</h2>
+        <div class="info-row">
+            <span>Name</span>
+            <strong id="profileName">—</strong>
+        </div>
+        <div class="info-row">
+            <span>Email</span>
+            <strong id="profileEmail">—</strong>
+        </div>
+        <div class="info-row">
+            <span>Phone</span>
+            <strong id="profilePhone">—</strong>
+        </div>
+        <div class="info-row">
+            <span>Join Date</span>
+            <strong id="joinDate">—</strong>
+        </div>
+    </div>
+</section>
+
+<!-- FEES PAGE -->
+<section id="Fees" class="page">
+    <div class="card">
+        <h2>Fee Details</h2>
+        <div id="feeDetails" class="empty">
+            No fee information available.
+        </div>
+    </div>
+</section>
+
+</main>
+</div>
+
+<script>
+// Page navigation
+function showPage(pageName, button) {
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    document.getElementById(pageName).classList.add("active");
+
+    document.querySelectorAll(".sidebar button").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    if (button) {
+        button.classList.add("active");
+    }
+}
+
+// Display a list without hardcoded student data
+function renderList(elementId, items, createItem, message) {
+    const element = document.getElementById(elementId);
+
+    element.replaceChildren();
+
+    if (!Array.isArray(items) || items.length === 0) {
+        element.className = "empty";
+        element.textContent = message;
+        return;
+    }
+
+    element.className = "";
+    items.forEach(item => {
+        element.appendChild(createItem(item));
+    });
+}
+
+// Create course cards from supplied data
+function renderCourse(course) {
+    const div = document.createElement("div");
+    div.className = "course";
+
+    const heading = document.createElement("div");
+    heading.className = "course-top";
+
+    const name = document.createElement("h3");
+    name.textContent = course.name ?? "";
+
+    const tag = document.createElement("span");
+    tag.className = "tag";
+    tag.textContent = course.status ?? "";
+
+    heading.append(name, tag);
+
+    const detail = document.createElement("p");
+    detail.textContent = course.duration ?? "";
+
+    const row = document.createElement("div");
+    row.className = "progress-row";
+
+    const bar = document.createElement("div");
+    bar.className = "progress";
+
+    const fill = document.createElement("span");
+    const progress = Math.max(
+        0, Math.min(100, Number(course.progress) || 0)
+    );
+    fill.style.width = progress + "%";
+
+    bar.appendChild(fill);
+
+    const percent = document.createElement("small");
+    percent.textContent = progress + "%";
+
+    row.append(bar, percent);
+    div.append(heading, detail, row);
+
+    return div;
+}
+
+// Update dashboard with data received later
+function updateDashboard(data) {
+    const student = data.student || {};
+
+    document.getElementById("studentName").textContent =
+        student.name || "Student";
+
+    document.getElementById("headerName").textContent =
+        student.name || "Student";
+
+    document.getElementById("profileName").textContent =
+        student.name || "—";
+
+    document.getElementById("profileEmail").textContent =
+        student.email || "—";
+
+    document.getElementById("profilePhone").textContent =
+        student.phone || "—";
+
+    document.getElementById("joinDate").textContent =
+        student.joinDate || "—";
+
+    const courses = data.courses || [];
+
+    document.getElementById("courseCount").textContent =
+        courses.length;
+
+    document.getElementById("lessonCount").textContent =
+        data.completedLessons ?? "—";
+
+    document.getElementById("quizAverage").textContent =
+        data.quizAverage == null ? "—" : data.quizAverage + "%";
+
+    document.getElementById("certificateCount").textContent =
+        (data.certificates || []).length;
+
+    renderList("dashboardCourses", courses, renderCourse,
+        "No courses available.");
+
+    renderList("allCourses", courses, renderCourse,
+        "No courses available.");
+
+    renderList("upcomingClasses", data.upcomingClasses || [],
+        item => {
+            const div = document.createElement("div");
+            div.className = "class-item";
+
+            const date = document.createElement("div");
+            date.className = "class-date";
+            date.textContent = item.date || "";
+
+            const details = document.createElement("div");
+            const title = document.createElement("h3");
+            title.textContent = item.title || "";
+
+            const time = document.createElement("p");
+            time.textContent = item.time || "";
+
+            details.append(title, time);
+            div.append(date, details);
+            return div;
+        }, "No upcoming classes.");
+
+    const attendance = data.attendance || {};
+
+    document.getElementById("attendance").textContent =
+        attendance.percentage == null
+            ? "—" : attendance.percentage + "%";
+
+    document.getElementById("presentClasses").textContent =
+        attendance.present ?? "—";
+
+    document.getElementById("totalClasses").textContent =
+        attendance.total ?? "—";
+
+    renderList("attendanceDetails", data.attendanceRecords || [],
+        item => {
+            const div = document.createElement("div");
+            div.className = "info-row";
+            const date = document.createElement("span");
+            date.textContent = item.date || "";
+            const status = document.createElement("strong");
+            status.textContent = item.status || "";
+            div.append(date, status);
+            return div;
+        }, "Attendance information is not available.");
+
+    renderList("recentQuizzes", data.quizzes || [],
+        item => {
+            const div = document.createElement("div");
+            div.className = "info-row";
+            const name = document.createElement("span");
+            name.textContent = item.name || "";
+            const score = document.createElement("strong");
+            score.textContent = item.score == null
+                ? "" : item.score + "%";
+            div.append(name, score);
+            return div;
+        }, "No quiz results available.");
+
+    renderList("quizList", data.quizzes || [],
+        item => {
+            const div = document.createElement("div");
+            div.className = "info-row";
+            const name = document.createElement("span");
+            name.textContent = item.name || "";
+            const score = document.createElement("strong");
+            score.textContent = item.score == null
+                ? "" : item.score + "%";
+            div.append(name, score);
+            return div;
+        }, "No quizzes available.");
+
+    renderList("announcements", data.announcements || [],
+        item => {
+            const div = document.createElement("div");
+            div.className = "notice";
+            div.textContent = item.title || "";
+            const date = document.createElement("small");
+            date.textContent = item.date || "";
+            div.appendChild(date);
+            return div;
+        }, "No announcements available.");
+
+    renderList("assignmentList", data.assignments || [],
+        item => {
+            const div = document.createElement("div");
+            div.className = "notice";
+            div.textContent = item.title || "";
+            const due = document.createElement("small");
+            due.textContent = item.dueDate || "";
+            div.appendChild(due);
+            return div;
+        }, "No assignments available.");
+
+    renderList("certificateList", data.certificates || [],
+        item => {
+            const div = document.createElement("div");
+            div.className = "notice";
+            div.textContent = item.name || "";
+            const date = document.createElement("small");
+            date.textContent = item.date || "";
+            div.appendChild(date);
+            return div;
+        }, "No certificates available.");
+
+    renderList("feeDetails", data.fees || [],
+        item => {
+            const div = document.createElement("div");
+            div.className = "info-row";
+            const course = document.createElement("span");
+            course.textContent = item.course || "";
+            const amount = document.createElement("strong");
+            amount.textContent = item.amount == null
+                ? "" : String(item.amount);
+            div.append(course, amount);
+            return div;
+        }, "No fee information available.");
+}
+
+// Placeholder for the future authentication system
+function logout() {
+    alert("Connect the login system to enable logout.");
+}
+</script>
+
+</body>
+</html>
